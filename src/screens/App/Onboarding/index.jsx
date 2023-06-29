@@ -13,19 +13,19 @@ export default function Onboarding({ navigation }) {
       key: 1,
       title: <Text>AWESOME{'\n'}<Styled.TextDiff>LOCAL</Styled.TextDiff> FOOD</Text>,
       text: 'Discover delicious food from the amazing\nrestaurants near you',
-      image: require('../../../assets/intro1.png'),
+      image: require('../../../assets/Onboarding/intro1.png'),
     },
     {
       key: 2,
       title: <Text>DELIVERED AT{'\n'}YOUR<Styled.TextDiff> DOORSTEP</Styled.TextDiff></Text>,
       text: 'Fresh and delicious local food delivered from\nthe restaurants to your doorstep',
-      image: require('../../../assets/intro2.png'),
+      image: require('../../../assets/Onboarding/intro2.png'),
     },
     {
       key: 3,
       title: <Text>GRAB THE{'\n'}BEST<Styled.TextDiff> DEALS</Styled.TextDiff> AROUND</Text>,
       text: 'Grab the best deals and discounts around and\nsave on your every order',
-      image: require('../../../assets/intro3.png'),
+      image: require('../../../assets/Onboarding/intro3.png'),
     },
   ];
 

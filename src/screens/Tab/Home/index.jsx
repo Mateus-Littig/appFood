@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
 import { ScrollView, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,10 +9,10 @@ import api from '../../../services/api';
 export default function Home() {
   const [restaurant, setRestaurant] = useState([]);
 
-    //http://192.168.1.39:1337/
+  // http://192.168.1.39:1337/
 
   async function getRestaurant() {
-    const response = await api.get(`/restaurantes/?populate=*`);
+    const response = await api.get('/restaurantes/?populate=*');
     setRestaurant(response.data.data);
     // console.log(response.data.data[0].attributes.image.data[0].attributes.url);
   }
@@ -19,6 +20,7 @@ export default function Home() {
   useEffect(() => {
     getRestaurant();
   }, []);
+
   return (
     <Styled.Container>
       <ScrollView>
@@ -54,10 +56,11 @@ export default function Home() {
           horizontal
           showsHorizontalScrollIndicator={false}
           data={restaurant}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <Styled.ViewRestaurant>
               <Styled.CardRestaurant>
-                <Styled.Img source={{ uri: `http://192.168.0.28:1337${item.attributes.image.data[0].attributes.url}` }} />
+                <Styled.Img source={{ uri: `http://192.168.1.38:1337${item.attributes.image.data[0].attributes.url}` }} />
               </Styled.CardRestaurant>
             </Styled.ViewRestaurant>
           )}

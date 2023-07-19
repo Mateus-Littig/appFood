@@ -15,7 +15,9 @@ export function ButtonUser({
           color="#2FDBBC"
         />
       </TouchableOpacity>
-      <Styled.Title>{name}</Styled.Title>
+      <Styled.ViewText>
+        <Styled.Title>{name}</Styled.Title>
+      </Styled.ViewText>
       <TouchableOpacity onPress={onPress}>
         <MaterialIcons
           name="keyboard-arrow-right"

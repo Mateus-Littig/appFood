@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import * as Styled from './styles';
 
 export function RecentSearch({
-  name, onPress
+  name, onPress,
 }) {
   return (
     <Styled.Container>
@@ -15,7 +15,9 @@ export function RecentSearch({
           color="#A3A3A3"
         />
       </TouchableOpacity>
-      <Styled.Title>{name}</Styled.Title>
+      <Styled.ViewTitle>
+        <Styled.Title>{name}</Styled.Title>
+      </Styled.ViewTitle>
       <TouchableOpacity onPress={onPress}>
         <MaterialIcons
           name="close"

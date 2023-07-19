@@ -8,6 +8,10 @@ export const Container = styled.View`
   margin-top: 20px;
   align-items: center;
 `;
+export const ViewTitle = styled.View`
+  width: 60%;
+  justify-content: center;
+`;
 export const Title = styled.Text`
   font-size: 17px;
   font-weight: 600;

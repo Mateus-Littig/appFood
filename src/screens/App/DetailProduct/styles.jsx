@@ -6,11 +6,13 @@ export const Container = styled.View`
   justify-content: space-between;
 `;
 export const ContentHeader = styled.View`
+  align-items: center;
 `;
 export const Img = styled.Image`
   min-width: 400px;
-  min-height: 325px;
-  margin: 0 auto;
+  min-height: 300px;
+  aspect-ratio: 1;
+  margin-top: 20px;
 `;
 export const Icon = styled.Image`
   width: 30px;

@@ -41,7 +41,6 @@ export const Footer = styled.View`
 export const Card = styled.View`
   width: 157px;
   height: 230px;
-  margin-left: 15px;
   margin-top: 20px;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.COLORS.LightGray};

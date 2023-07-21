@@ -1,7 +1,5 @@
-/* eslint-disable no-use-before-define */
 /* eslint-disable object-shorthand */
 /* eslint-disable prefer-destructuring */
-/* eslint-disable global-require */
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,43 +19,43 @@ export function DetailProduct() {
 
   async function getProductId() {
     try {
-      const response = await api.get(`/produtos/${route.params?.id}/?populate=*`);
+      const response = await api.get(`/produtos/${route?.params?.id}/?populate=*`);
       setCartItems(response.data.data.attributes);
       setPrice(response.data.data.attributes.value);
     } catch (error) {
-      // console.log('Erro ao buscar produto', error);
+      console.log('Erro ao buscar produto', error);
     }
   }
 
-  // const addProd = async (item, value, qtd) => {
-  //   try {
-  //     // Verifica se o produto já existe no armazenamento
-  //     const produtoExistente = await AsyncStorage.getItem(dataKey);
+  const addProd = async (value, qtd) => {
+    try {
+      // Verifica se o produto já existe no armazenamento
+      const produtoExistente = await AsyncStorage.getItem(dataKey);
 
-  //     if (produtoExistente !== null) {
-  //       // Se o produto já existe, atualize o valor e a quantidade
-  //       const produtoAtualizado = {
-  //         ...JSON.parse(produtoExistente),
-  //         value: value,
-  //         quantidade: qtd + (JSON.parse(produtoExistente).quantidade || 0),
-  //       };
+      if (produtoExistente !== null) {
+        // Se o produto já existe, atualize o valor e a quantidade
+        const produtoAtualizado = {
+          ...JSON.parse(produtoExistente),
+          value: value,
+          quantidade: qtd + (JSON.parse(produtoExistente).quantidade || 0),
+        };
 
-  //       await AsyncStorage.setItem(dataKey, JSON.stringify(produtoAtualizado));
-  //     } else {
-  //       // Se o produto não existe, crie um novo objeto com o valor e a quantidade
-  //       const newProduct = {
-  //         ...item,
-  //         value,
-  //         qtd,
-  //       };
+        await AsyncStorage.setItem(dataKey, JSON.stringify(produtoAtualizado));
+      } else {
+        // Se o produto não existe, crie um novo objeto com o valor e a quantidade
+        const newProduct = {
+          cartItems,
+          value,
+          qtd,
+        };
 
-  //       await AsyncStorage.setItem(dataKey, JSON.stringify(newProduct));
-  //       console.log(newProduct);
-  //     }
-  //   } catch (error) {
-  //     console.log('Erro ao adicionar o produto ao AsyncStorage:', error);
-  //   }
-  // };
+        await AsyncStorage.setItem(dataKey, JSON.stringify(newProduct));
+        console.log(newProduct);
+      }
+    } catch (error) {
+      console.log('Erro ao adicionar o produto ao AsyncStorage:', error);
+    }
+  };
 
   const handleMore = () => {
     setQtdProd(qtdProd + 1);
@@ -67,27 +65,30 @@ export function DetailProduct() {
       setQtdProd(qtdProd - 1);
     }
   };
+  const result = price * qtdProd;
+  const formattedResult = result.toFixed(2);
+  // formatando o resultado para que tenha apenas dois dígitos após a vírgula
 
-  const addToCart = async (item) => {
-    const items = await AsyncStorage.getItem(dataKey);
-    const updatedCart = cartItems ? JSON.parse(items) : [];
+  // const addToCart = async (item) => {
+  //   const items = await AsyncStorage.getItem(dataKey);
+  //   const updatedCart = cartItems ? JSON.parse(items) : [];
 
-    const itemsFormatted = {
-      ...updatedCart,
-    };
+  //   const itemsFormatted = {
+  //     ...updatedCart,
+  //   };
 
-    const existingItem = updatedCart.find((cartItem) => cartItem.id === item.id);
+  //   const existingItem = updatedCart.find((cartItem) => cartItem.id === item.id);
 
-    if (existingItem) {
-      existingItem.quantity += 1;
-    } else {
-      const newItem = { ...item, quantity: 1 };
-      updatedCart.push(newItem);
-    }
+  //   if (existingItem) {
+  //     existingItem.quantity += 1;
+  //   } else {
+  //     const newItem = { ...item, quantity: 1 };
+  //     updatedCart.push(newItem);
+  //   }
 
-    await AsyncStorage.setItem(dataKey, JSON.stringify(itemsFormatted));
-    // console.log(updatedCart);
-  };
+  //   await AsyncStorage.setItem(dataKey, JSON.stringify(itemsFormatted));
+  //   // console.log(updatedCart);
+  // };
 
   // const removeFromCart = async (itemId) => {
   //   const updatedCart = cartItems.filter((item) => item.id !== itemId);
@@ -97,7 +98,7 @@ export function DetailProduct() {
 
   useEffect(() => {
     getProductId();
-    addToCart();
+    addProd();
   }, []);
 
   return (
@@ -150,7 +151,7 @@ export function DetailProduct() {
           <Styled.Price>
             R$
             {' '}
-            {price * qtdProd}
+            {formattedResult}
           </Styled.Price>
         </Styled.ViewSub>
       </Styled.Footer>

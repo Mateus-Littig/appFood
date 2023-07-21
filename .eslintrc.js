@@ -24,6 +24,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/no-unescaped-entities': 'off',
     'no-unused-vars': 'off',
+    'global-require': 'off',
 
   },
 };
